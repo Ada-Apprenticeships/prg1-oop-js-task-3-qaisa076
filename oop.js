@@ -8,7 +8,8 @@ function validInteger(value) {
 }
 
 function validatePriority(priority) {
-
+    const value = Number(priority);
+    return Object.values(PRIORITY).includes(value) ? value : PRIORITY.LOW;
 }
 
 function todaysDate() {
