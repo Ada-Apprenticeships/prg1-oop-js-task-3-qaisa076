@@ -25,6 +25,12 @@ function todaysDate() {
 
 
 class Task {
+    constructor(title, priority) {
+        this._title = title; 
+        this._priority = validatePriority(priority); 
+        this._added = todaysDate(); 
+    }
+
     
 }
 
