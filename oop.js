@@ -52,6 +52,10 @@ class Task {
 
 // ToDo Class
 class ToDo {
+    constructor() {
+        this.tasks = []; 
+    }
+ 
    
 }
 
