@@ -87,8 +87,13 @@ class ToDo {
         }
         throw new Error(`Task '${title}' Not Found`);
     }
- 
 }
+try {
+    console.log(taskList.task('WrongTitle')); // Should throw an error
+ } catch (error) {
+    console.error(error.message); // Outputs: Task 'WrongTitle' Not Found
+ }
+ 
 
 
 
