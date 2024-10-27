@@ -55,8 +55,22 @@ class ToDo {
     constructor() {
         this.tasks = []; 
     }
+    add(task) {
+        if (task instanceof Task) {
+            this.tasks.push(task);
+            return this.tasks.length; 
+        }
+        throw new Error("Only instances of Task can be added.");
+    }
  
-   
+    remove(title) {
+        const index = this.tasks.findIndex(task => task.title === title);
+        if (index !== -1) {
+            this.tasks.splice(index, 1);
+            return true;
+        }
+        return false; 
+    }
 }
 
 
