@@ -71,6 +71,23 @@ class ToDo {
         }
         return false; 
     }
+    list(priority = 0) {
+        if (priority === 0) {
+            return this.tasks.map(task => [task.added, task.title, task.priority]); 
+        }
+        return this.tasks
+            .filter(task => task.priority === priority)
+            .map(task => [task.added, task.title, task.priority]); 
+    }
+
+    task(title) {
+        const task = this.tasks.find(task => task.title === title);
+        if (task) {
+            return task; 
+        }
+        throw new Error(`Task '${title}' Not Found`);
+    }
+ 
 }
 
 
