@@ -30,8 +30,24 @@ class Task {
         this._priority = validatePriority(priority); 
         this._added = todaysDate(); 
     }
-
-    
+    get title() {
+        return this._title;
+    }
+ 
+ 
+    get priority() {
+        return this._priority;
+    }
+ 
+ 
+    set priority(value) {
+        this._priority = validatePriority(value); 
+    }
+ 
+ 
+    get added() {
+        return this._added;
+    }
 }
 
 // ToDo Class
