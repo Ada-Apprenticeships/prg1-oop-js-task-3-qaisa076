@@ -1,21 +1,22 @@
-
+// Priority levels with values.
 const PRIORITY = { "LOW": 1, "MEDIUM": 3, "HIGH": 5, "URGENT": 7 };
 
+// Checks if the value is a positive integer.
 function validInteger(value) {
-    const strValue = String(value);
-    const isPositiveInteger = /^\d+$/.test(strValue);
-    return isPositiveInteger;
+    return /^\d+$/.test(String(value)); 
 }
 
+// Validates priority, defaults to LOW if invalid.
 function validatePriority(priority) {
     const value = Number(priority);
     return Object.values(PRIORITY).includes(value) ? value : PRIORITY.LOW;
 }
 
+// Returns the current date and time formatted as a string.
 function todaysDate() {
     const now = new Date();
     const day = String(now.getDate()).padStart(2, '0');
-    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0'); // Month is zero-indexed
     const year = now.getFullYear();
     const hours = String(now.getHours()).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
@@ -23,38 +24,41 @@ function todaysDate() {
     return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
 }
 
-
 class Task {
+    #title; 
+    #priority; 
+    #added; 
+
     constructor(title, priority) {
-        this._title = title; 
-        this._priority = validatePriority(priority); 
-        this._added = todaysDate(); 
+        this.#title = title; 
+        this.#priority = validatePriority(priority); 
+        this.#added = todaysDate(); 
     }
+
     get title() {
-        return this._title;
+        return this.#title; 
     }
- 
- 
+    
     get priority() {
-        return this._priority;
+        return this.#priority; 
     }
- 
- 
+
     set priority(value) {
-        this._priority = validatePriority(value); 
+        this.#priority = validatePriority(value); 
     }
- 
- 
+
     get added() {
-        return this._added;
+        return this.#added; 
     }
 }
 
-// ToDo Class
+// Manages a collection of tasks
 class ToDo {
     constructor() {
         this.tasks = []; 
     }
+
+    // Adds a Task instance
     add(task) {
         if (task instanceof Task) {
             this.tasks.push(task);
@@ -63,40 +67,42 @@ class ToDo {
         throw new Error("Only instances of Task can be added.");
     }
  
+    // Removes a task by title
     remove(title) {
         const index = this.tasks.findIndex(task => task.title === title);
         if (index !== -1) {
-            this.tasks.splice(index, 1);
-            return true;
+            this.tasks.splice(index, 1); 
+            return true; 
         }
         return false; 
     }
+
+    // Lists tasks, filtered by priority if provided
     list(priority = 0) {
         if (priority === 0) {
             return this.tasks.map(task => [task.added, task.title, task.priority]); 
         }
         return this.tasks
-            .filter(task => task.priority === priority)
-            .map(task => [task.added, task.title, task.priority]); 
+            .filter(task => task.priority === priority) 
+            .map(task => [task.added, task.title, task.priority]);
     }
 
+    // Retrieves a task by title
     task(title) {
         const task = this.tasks.find(task => task.title === title);
         if (task) {
-            return task; 
+            return task;
         }
-        throw new Error(`Task '${title}' Not Found`);
+        throw new Error(`Task '${title}' Not Found`); 
     }
 }
+
+// Example usage with error handling
 try {
-    console.log(taskList.task('WrongTitle')); // Should throw an error
- } catch (error) {
-    console.error(error.message); // Outputs: Task 'WrongTitle' Not Found
- }
- 
-
-
-
+    console.log(taskList.task('WrongTitle')); 
+} catch (error) {
+    console.error(error.message); 
+}
 
 
 // Leave this code here for the automated tests
