@@ -48,7 +48,7 @@ class Task {
     }
 
     get added() {
-        return this.#added; 
+        return this.addedadded; 
     }
 }
 
@@ -96,6 +96,9 @@ class ToDo {
         throw new Error(`Task '${title}' Not Found`); 
     }
 }
+
+// Create an instance of ToDo
+const taskList = new ToDo();
 
 // Example usage with error handling
 try {
